@@ -44,7 +44,7 @@ var PinboardFXT = {
             }
             catch(err)
             {
-                
+            	title = window._content.document.title;    
             }
             var desc  = '';
             var uri   = gContextMenu.linkURL ? gContextMenu.linkURL : window._content.document.location.href;
@@ -54,8 +54,16 @@ var PinboardFXT = {
     readLaterLink : function()
         {
             var uri   = gContextMenu.linkURL ? gContextMenu.linkURL : window._content.document.location.href;
-            var title = gContextMenu.linkText();
-            this.readLater(uri, title);
+            var title;
+	    try 
+	    {
+	    	title = gContextMenu.linkText();
+            }
+	    catch(err) 
+	    {
+                title = window._content.document.title;
+            }	
+	    this.readLater(uri, title);
         },
     
     readLater : function(uri, title)
